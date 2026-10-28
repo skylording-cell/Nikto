@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#281080">
+<title>Big Happy House — подарки с радостью</title>
+<style>
+:root{--purple:#281080;--purple2:#5520c9;--pink:#f20aa8;--text:#24106f;--muted:#6c5aa9;--card:#ffffffed}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;color:var(--text);background:linear-gradient(180deg,#2684ff 0%,#f4a8ff 45%,#9875ff 100%);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+radial-gradient(circle at 4% 13%,#ff4fba 0 38px,transparent 40px),
+radial-gradient(circle at 95% 25%,#ffd02f 0 38px,transparent 40px),
+radial-gradient(circle at 8% 62%,#25d7ff 0 35px,transparent 37px),
+radial-gradient(circle at 94% 70%,#ff64a9 0 42px,transparent 44px),
+radial-gradient(circle at 50% 8%,#ffffff44 0 2px,transparent 3px)}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+.confetti span{position:absolute;width:10px;height:22px;border-radius:4px;transform:rotate(35deg);opacity:.85;animation:float 7s ease-in-out infinite}
+.confetti span:nth-child(6n+1){background:#ffcf32}.confetti span:nth-child(6n+2){background:#ff39b8}.confetti span:nth-child(6n+3){background:#42e6ff}.confetti span:nth-child(6n+4){background:#8c42ff}.confetti span:nth-child(6n+5){background:#7af28d}.confetti span:nth-child(6n){background:#fff}
+@keyframes float{0%,100%{transform:translateY(0) rotate(25deg)}50%{transform:translateY(-20px) rotate(80deg)}}
+.topbar{height:62px;background:#261075f5;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100% - 1200px)/2));gap:20px;position:relative;z-index:5;box-shadow:0 5px 18px #18064c33}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:clamp(19px,2.5vw,29px);font-weight:1000;letter-spacing:-1px;white-space:nowrap}
+.brand-icon{font-size:32px;filter:drop-shadow(0 3px 0 #17065b)}
+.brand .happy{color:#ffcf24}
+.nav{display:flex;align-items:center;gap:8px;height:100%}
+.nav button,.login{border:0;background:transparent;color:#fff;font:inherit;font-weight:750;padding:12px 14px;border-radius:12px;cursor:pointer}
+.nav button.active,.nav button:hover,.login:hover{background:#ffffff18}
+.login{white-space:nowrap}
+.mobile-menu{display:none}
+.hero{max-width:1200px;margin:0 auto;text-align:center;position:relative;min-height:265px;padding:28px 20px 14px;color:white;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:0 0 8px;border-radius:0 0 42% 42%;z-index:-1;background:radial-gradient(ellipse at 50% 10%,#77dfff 0%,#3d9cff 40%,transparent 72%)}
+.hero-title{font-size:clamp(48px,8vw,92px);line-height:.92;font-weight:1000;letter-spacing:-4px;text-shadow:0 5px 0 #6b2cc8,0 9px 0 #30117f,0 12px 20px #30117f55;margin:4px 0 12px;transform:rotate(-2deg)}
+.hero-title .yellow{color:#ffd32e}
+.hero-sub{display:inline-block;background:linear-gradient(120deg,#922cf2,#e329d2);padding:12px 25px;border-radius:30px;font-weight:800;font-size:clamp(14px,2vw,20px);box-shadow:0 8px 0 #6326c6}
+.scribble{position:absolute;top:42px;font-size:clamp(15px,2vw,23px);font-weight:900;line-height:1.05;transform:rotate(-12deg);text-shadow:0 2px 5px #4e3bff66}.scribble.left{left:4%;}.scribble.right{right:4%;transform:rotate(10deg)}
+main{max-width:1200px;margin:-4px auto 0;padding:0 18px 60px;position:relative}
+.panel{background:var(--card);border:1px solid #ffffffd9;border-radius:24px;box-shadow:0 18px 55px #4a1bb52b, inset 0 1px 0 #fff;padding:25px;margin-bottom:20px;backdrop-filter:blur(12px)}
+h2{font-size:clamp(22px,3vw,30px);margin:0 0 18px;display:flex;align-items:center;gap:12px;letter-spacing:-.6px}
+.gift-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:9px}
+.gift-option{min-width:0;border:1px solid #dcd0ff;background:linear-gradient(145deg,#fff,#f9f1ff);border-radius:14px;padding:13px 5px 12px;color:var(--text);cursor:pointer;transition:transform .16s,box-shadow .16s,border-color .16s;display:flex;align-items:center;flex-direction:column;gap:7px}
+.gift-option:hover{transform:translateY(-3px);box-shadow:0 8px 18px #5723bd1c}
+.gift-option.selected{border:2px solid #fa13b3;box-shadow:0 0 0 3px #ff4ac21a,0 7px 17px #d20c8c17;background:linear-gradient(145deg,#fff1fb,#fff)}
+.gift-emoji{font-size:30px;line-height:1.15;filter:drop-shadow(0 3px 1px #4420a122)}
+.gift-amount{font-size:clamp(11px,1.15vw,15px);font-weight:850;white-space:nowrap}
+.gift-price{font-weight:900;font-size:clamp(11px,1.1vw,15px);color:#ec078f;white-space:nowrap}
+.candy{font-size:18px;margin-right:3px}
+.range-area{margin-top:23px}
+.range-label{font-weight:850;margin-bottom:12px;font-size:16px}
+.range{width:100%;appearance:none;height:13px;border-radius:99px;background:linear-gradient(90deg,#ff149f,#8c27ff 10%,#ded5ff 10%);outline:none;cursor:pointer;display:block}
+.range::-webkit-slider-thumb{appearance:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#ff4fc7,#9b20ff);border:3px solid #fff;box-shadow:0 3px 8px #6e1ac65c}
+.range::-moz-range-thumb{width:23px;height:23px;border-radius:50%;background:linear-gradient(135deg,#ff4fc7,#9b20ff);border:3px solid #fff;box-shadow:0 3px 8px #6e1ac65c}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:#4f3c9e;margin-top:13px}
+.summary-row{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(100deg,#f3e8ff,#fbe8fa);border-radius:16px;padding:14px 18px}
+.summary-label{font-size:13px;font-weight:750;color:#7664b1}.summary-amount{font-size:22px;font-weight:950}.summary-price{font-size:clamp(20px,3vw,28px);font-weight:1000;color:#ec078f;white-space:nowrap}
+.order-action{text-align:center;margin-top:17px}
+.primary-btn{border:0;border-radius:999px;background:linear-gradient(100deg,#ff36b5,#df00a8);color:#fff;font:inherit;font-size:20px;font-weight:950;padding:15px 40px;min-width:min(360px,100%);box-shadow:0 7px 0 #ae168e33,0 12px 24px #e300a533;cursor:pointer;transition:transform .15s,filter .15s}
+.primary-btn:hover{filter:brightness(1.06);transform:translateY(-2px)}
+.orders-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.text-link{border:0;background:transparent;color:#7025df;font:inherit;font-weight:800;cursor:pointer}
+.orders-note{color:#6c5aa9;margin:-8px 0 15px;font-size:14px}
+.order-list{display:flex;flex-direction:column}
+.order-item{display:grid;grid-template-columns:1.1fr 1fr .8fr 1.4fr 20px;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid #e5dcff;font-size:14px}
+.order-item:last-child{border-bottom:0}
+.order-id{font-weight:900;color:#4430a0}
+.status{justify-self:start;border-radius:30px;padding:5px 11px;font-size:12px;font-weight:900;white-space:nowrap;background:#fff0cd;color:#b95800}
+.status.processing{background:#d9edff;color:#1765c2}.status.transit{background:#f0dcff;color:#7d22c8}.status.done{background:#d9f9e9;color:#16885c}
+.bottom-nav{display:none}
+.modal-backdrop{position:fixed;inset:0;background:#1b075a8c;backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}
+.modal-backdrop.open{display:flex}
+.modal{background:#fff;border:1px solid #fff;border-radius:25px;box-shadow:0 25px 90px #17074b66;padding:28px 25px 24px;width:min(440px,100%);text-align:center;position:relative;animation:pop .18s ease-out}
+@keyframes pop{from{transform:translateY(10px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.close-modal{position:absolute;right:16px;top:12px;border:0;background:transparent;font-size:25px;color:#8d7ac7;cursor:pointer}
+.modal-gift{font-size:40px}.modal h3{font-size:22px;line-height:1.25;margin:9px 0}.modal p{color:#5f4c9f;margin:12px 0 22px}
+.modal-buttons{display:flex;gap:10px}.modal-buttons button{flex:1;padding:13px 10px;border-radius:13px;font:inherit;font-weight:850;cursor:pointer}
+.cancel{border:1px solid #d7caff;background:#f7f4ff;color:#36227f}.confirm{border:0;background:linear-gradient(100deg,#ff36b5,#df00a8);color:white}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:30;background:#2a117b;color:#fff;padding:13px 20px;border-radius:15px;box-shadow:0 10px 30px #16064d44;font-weight:800;transition:.25s;text-align:center;width:max-content;max-width:calc(100% - 30px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#fff;font-weight:750;padding:0 20px 30px;text-shadow:0 2px 5px #41208a66}
+@media(max-width:1050px){.gift-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.gift-amount,.gift-price{font-size:14px}.gift-option{padding:12px 5px}.hero{min-height:245px}}
+@media(max-width:650px){
+ .topbar{height:58px;padding:0 15px;gap:8px}.brand{font-size:21px;letter-spacing:-.8px}.brand-icon{font-size:27px}.nav{display:none}.mobile-menu{display:block;border:0;background:#ffffff18;color:white;border-radius:10px;font-size:23px;padding:7px 10px}
+ .hero{min-height:220px;padding:30px 10px 24px}.hero-title{font-size:clamp(48px,13vw,75px);letter-spacing:-3px;margin-top:17px}.hero-sub{font-size:13px;padding:10px 15px;max-width:90%}.scribble{font-size:13px;top:12px}.scribble.left{left:8px}.scribble.right{right:8px}
+ main{padding:0 10px 95px;margin-top:-3px}.panel{padding:17px 13px;border-radius:21px;margin-bottom:13px}h2{font-size:22px;margin-bottom:15px}
+ .gift-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.gift-option{min-height:111px;padding:10px 3px;border-radius:13px;gap:5px}.gift-emoji{font-size:29px}.gift-amount{font-size:12px}.gift-price{font-size:13px}.candy{font-size:15px}
+ .range-area{margin-top:20px}.range-label{font-size:14px}.ticks{font-size:11px}.summary-row{padding:13px 12px;margin-top:17px}.summary-amount{font-size:18px}.summary-price{font-size:20px}.primary-btn{font-size:18px;padding:15px 20px;min-width:100%}
+ .orders-head{align-items:flex-start}.orders-head h2{font-size:21px}.text-link{font-size:12px;padding:5px 0}.orders-note{font-size:12px}
+ .order-item{grid-template-columns:1fr auto;gap:5px 10px;padding:12px 1px;font-size:13px}.order-id{grid-column:1}.order-qty{grid-column:1}.order-cost{grid-column:2;grid-row:2;text-align:right}.status{grid-column:1;grid-row:3;margin-top:3px}.order-arrow{grid-column:2;grid-row:1 / span 3;align-self:center}
+ .bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:#ffffffed;backdrop-filter:blur(15px);border-top:1px solid #e5dcff;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));box-shadow:0 -8px 25px #3e168b18}
+ .bottom-nav button{background:transparent;border:0;color:#8b79ce;font:inherit;font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:62px;cursor:pointer}.bottom-nav button span{font-size:23px}.bottom-nav button.active{color:#f20aa8}
+ .modal{padding:26px 18px 20px}.modal h3{font-size:20px}.modal-buttons{flex-direction:column}.modal-buttons button{padding:13px}
+}
+@media(min-width:651px) and (max-width:850px){.gift-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.order-item{grid-template-columns:1fr 1fr 1fr 1.4fr 16px;font-size:12px;gap:6px}.status{font-size:11px;padding:5px 7px}}
+</style>
+</head>
+<body>
+<div class="confetti" aria-hidden="true" id="confetti"></div>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Big Happy House — главная"><span class="brand-icon">🏠</span><span>Big <span class="happy">Happy</span> House</span></a>
+  <nav class="nav" aria-label="Главная навигация">
+    <button class="active" data-scroll="home">⌂ &nbsp; Главная</button>
+    <button data-scroll="orders">▣ &nbsp; Заказы</button>
+    <button id="supportBtn">☏ &nbsp; Поддержка</button>
+  </nav>
+  <button class="login" id="loginBtn">◉ <span>Войти</span></button>
+  <button class="mobile-menu" id="menuBtn" aria-label="Открыть меню">☰</button>
+</header>
+<section class="hero" id="home">
+  <div class="scribble left">Дарите<br>радость! ♥</div>
+  <div class="scribble right">Маленькие подарки —<br>большие эмоции! ♥</div>
+  <div class="hero-title"><span>Big</span><br><span class="yellow">Happy</span><br>House</div>
+  <div class="hero-sub">Подарки, которые делают людей счастливее!</div>
+</section>
+<main>
+  <section class="panel" aria-labelledby="orderTitle">
+    <h2 id="orderTitle">🎁 Заказать подарок</h2>
+    <div class="gift-grid" id="giftGrid"></div>
+    <div class="range-area">
+      <div class="range-label">Или выберите количество подарков:</div>
+      <input class="range" id="giftRange" type="range" min="0.1" max="10" step="0.1" value="1" aria-label="Количество подарков">
+      <div class="ticks"><span>0.1</span><span>0.2</span><span>0.5</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+    </div>
+    <div class="summary-row">
+      <div><div class="summary-label">Вы выбрали:</div><div class="summary-amount" id="summaryAmount">🎁 1 подарок</div></div>
+      <div class="summary-price" id="summaryPrice">🍬 3 000</div>
+    </div>
+    <div class="order-action"><button class="primary-btn" id="orderBtn">🎁 &nbsp; Заказать</button></div>
+  </section>
+  <section class="panel" id="orders">
+    <div class="orders-head"><h2>🔒 Мои заказы</h2><button class="text-link" id="allOrders">Все заказы&nbsp; →</button></div>
+    <p class="orders-note">Здесь будут отображаться ваши заказы и их статусы.</p>
+    <div class="order-list" id="orderList">
+      <div class="order-item"><span class="order-id">#28488583</span><span class="order-qty">1 подарок</span><span class="order-cost">🍬 3 000</span><span class="status">Отправлен на проверку</span><span class="order-arrow">›</span></div>
+      <div class="order-item"><span class="order-id">#28488582</span><span class="order-qty">2 подарка</span><span class="order-cost">🍬 6 000</span><span class="status processing">В обработке</span><span class="order-arrow">›</span></div>
+      <div class="order-item"><span class="order-id">#28488581</span><span class="order-qty">0.5 подарка</span><span class="order-cost">🍬 1 500</span><span class="status transit">Заказ в пути</span><span class="order-arrow">›</span></div>
+      <div class="order-item"><span class="order-id">#28488580</span><span class="order-qty">3 подарка</span><span class="order-cost">🍬 9 000</span><span class="status done">Готово</span><span class="order-arrow">›</span></div>
+    </div>
+  </section>
+</main>
+<footer>✨ Big Happy House — больше подарков, больше счастья! ✨</footer>
+<nav class="bottom-nav" aria-label="Мобильная навигация">
+  <button class="active" data-scroll="home"><span>⌂</span>Главная</button>
+  <button data-scroll="orders"><span>🎁</span>Заказы</button>
+  <button id="profileNav"><span>👤</span>Профиль</button>
+  <button id="settingsNav"><span>⚙</span>Настройки</button>
+</nav>
+<div class="modal-backdrop" id="confirmBackdrop" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="modal">
+    <button class="close-modal" id="closeModal" aria-label="Закрыть">×</button>
+    <div class="modal-gift">🎁</div>
+    <h3 id="confirmTitle">Вы уверены, что хотите сделать заказ?</h3>
+    <p id="confirmText">1 подарок (3 000 конфет)</p>
+    <div class="modal-buttons"><button class="cancel" id="cancelBtn">Отмена</button><button class="confirm" id="confirmBtn">Да, сделать заказ</button></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const gifts=[0.5,1,2,3,4,5,6,7,8,9,10];
+const grid=document.getElementById('giftGrid'),range=document.getElementById('giftRange');
+let selected=1, pending=null;
+const money=n=>Math.round(n).toLocaleString('ru-RU').replace(/\u00a0/g,' ');
+function giftWord(n){if(n===0.5)return 'подарка';if(n%1!==0)return 'подарка';let a=n%10,b=n%100;if(b>=11&&b<=14)return 'подарков';if(a===1)return 'подарок';if(a>=2&&a<=4)return 'подарка';return 'подарков'}
+function price(n){return n*3000}
+function fmtQty(n){return Number.isInteger(n)?String(n):String(n.toFixed(1)).replace('.',',')}
+function renderButtons(){
+  gifts.forEach((n,i)=>{const b=document.createElement('button');b.className='gift-option';b.dataset.qty=n;b.innerHTML=`<span class="gift-emoji">${i%4===0?'🎁':i%4===1?'🎀':i%4===2?'🎁':'🎁'}</span><span class="gift-amount">${fmtQty(n)} ${giftWord(n)}</span><span class="gift-price"><span class="candy">🍬</span>${money(price(n))}</span>`;b.addEventListener('click',()=>setQuantity(n));grid.appendChild(b)});
+}
+function setQuantity(n){
+ selected=Math.max(.1,Math.min(10,Math.round(n*10)/10));range.value=selected;
+ document.querySelectorAll('.gift-option').forEach(b=>b.classList.toggle('selected',Number(b.dataset.qty)===selected));
+ document.getElementById('summaryAmount').textContent=`🎁 ${fmtQty(selected)} ${giftWord(selected)}`;
+ document.getElementById('summaryPrice').textContent=`🍬 ${money(price(selected))}`;
+ const pct=((selected-.1)/(10-.1))*100;range.style.background=`linear-gradient(90deg,#ff149f 0%,#8c27ff ${pct}%,#ded5ff ${pct}%,#ded5ff 100%)`;
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove('show'),2600)}
+function openModal(){pending={qty:selected,price:price(selected)};document.getElementById('confirmText').textContent=`${fmtQty(pending.qty)} ${giftWord(pending.qty)} (${money(pending.price)} конфет)`;document.getElementById('confirmBackdrop').classList.add('open')}
+function closeModal(){document.getElementById('confirmBackdrop').classList.remove('open')}
+function createOrder(){
+ if(!pending)return;
+ const id='#'+Math.floor(10000000+Math.random()*89999999);
+ const row=document.createElement('div');row.className='order-item';
+ row.innerHTML=`<span class="order-id">${id}</span><span class="order-qty">${fmtQty(pending.qty)} ${giftWord(pending.qty)}</span><span class="order-cost">🍬 ${money(pending.price)}</span><span class="status">Отправлен на проверку</span><span class="order-arrow">›</span>`;
+ document.getElementById('orderList').prepend(row);closeModal();showToast(`Заказ ${id} создан!`);pending=null;
+ document.getElementById('orders').scrollIntoView({behavior:'smooth',block:'start'});
+}
+renderButtons();setQuantity(1);
+range.addEventListener('input',e=>setQuantity(Number(e.target.value)));
+document.getElementById('orderBtn').addEventListener('click',openModal);
+document.getElementById('closeModal').addEventListener('click',closeModal);
+document.getElementById('cancelBtn').addEventListener('click',closeModal);
+document.getElementById('confirmBtn').addEventListener('click',createOrder);
+document.getElementById('confirmBackdrop').addEventListener('click',e=>{if(e.target.id==='confirmBackdrop')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',()=>{document.getElementById(b.dataset.scroll).scrollIntoView({behavior:'smooth'});document.querySelectorAll('[data-scroll]').forEach(x=>x.classList.toggle('active',x===b))}));
+document.getElementById('menuBtn').addEventListener('click',()=>{const target=document.getElementById('orders');target.scrollIntoView({behavior:'smooth'});showToast('Ваши заказы')});
+['loginBtn','supportBtn','profileNav','settingsNav','allOrders'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>showToast('Эта функция появится в следующей версии ✨')));
+const confetti=document.getElementById('confetti');
+for(let i=0;i<58;i++){const s=document.createElement('span');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=(-Math.random()*7)+'s';s.style.animationDuration=(5+Math.random()*6)+'s';s.style.transform=`rotate(${Math.random()*150}deg) scale(${.5+Math.random()*.8})`;confetti.appendChild(s)}
+</script>
+</body>
+</html>
