@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffaf0">
+<title>Big Happy House — дарите радость</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="topbar">
+  <a class="brand" href="#home" aria-label="Big Happy House — главная">
+    <span class="brand-mark">B<span>H</span></span>
+    <span class="brand-name">Big Happy <b>House</b><small>THE LITTLE JOY CLUB</small></span>
+  </a>
+  <a class="orders-shortcut" href="#orders"><span class="tiny-dot"></span> Мои заказы <span class="order-count" id="headerCount">0</span></a>
+</header>
+<main id="home">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="sparkle">✦</span> YOUR DAILY DOSE OF HAPPY</div>
+      <h1>Большая радость<br><em>в маленьком подарке.</em></h1>
+      <p class="hero-sub">Дарите радость — по одной конфетке за раз.</p>
+      <div class="hero-note"><span class="note-icon">✳</span><span>Кому-то сегодня станет<br><b>чуточку радостнее!</b></span></div>
+    </div>
+    <div class="mascot-stage" id="mascotStage" aria-label="Весёлый домик-талисман">
+      <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+      <span class="float-star star-a">✦</span><span class="float-star star-b">✧</span><span class="float-heart">♥</span>
+      <svg id="mascot" class="mascot idle" viewBox="0 0 300 300" role="img" aria-label="Милый жёлтый домик в зелёной праздничной кепке с бумажной дудкой">
+        <defs>
+          <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe78b"/><stop offset=".58" stop-color="#ffd35b"/><stop offset="1" stop-color="#f5ae38"/></linearGradient>
+          <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9fba"/><stop offset="1" stop-color="#ed638c"/></linearGradient>
+          <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42c979"/><stop offset="1" stop-color="#16894b"/></linearGradient>
+          <linearGradient id="window" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff9db"/><stop offset="1" stop-color="#ffdca4"/></linearGradient>
+          <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="11" stdDeviation="9" flood-color="#9a6b3d" flood-opacity=".2"/></filter>
+        </defs>
+        <ellipse cx="151" cy="266" rx="84" ry="15" fill="#d4b47a" opacity=".22"/>
+        <g class="house-body" filter="url(#shadow)">
+          <path d="M66 132 L150 69 L234 132 L234 224 Q234 239 218 239 L82 239 Q66 239 66 224Z" fill="url(#wall)" stroke="#e7a23e" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M51 137 L143 66 Q150 60 158 66 L250 137 Q255 142 250 147 Q247 150 242 146 L150 80 L59 146 Q54 150 50 146 Q47 141 51 137Z" fill="url(#roof)" stroke="#df6a91" stroke-width="3"/>
+          <path d="M80 146 Q150 125 220 146" fill="none" stroke="#fff0bc" stroke-width="3" opacity=".8"/>
+          <rect x="87" y="164" width="38" height="37" rx="11" fill="url(#window)" stroke="#eaa744" stroke-width="3"/>
+          <path d="M106 166 V199 M89 182 H123" stroke="#eaa744" stroke-width="3" opacity=".8"/>
+          <rect x="160" y="177" width="43" height="62" rx="20 20 0 0" fill="#f2a84c" stroke="#e49a3e" stroke-width="3"/>
+          <circle cx="193" cy="208" r="3" fill="#fff0b9"/>
+          <g class="face">
+            <ellipse class="cheek" cx="112" cy="151" rx="13" ry="8" fill="#f88d9c" opacity=".8"/>
+            <ellipse class="cheek" cx="190" cy="151" rx="13" ry="8" fill="#f88d9c" opacity=".8"/>
+            <g class="eyes">
+              <ellipse class="eye" cx="127" cy="139" rx="9" ry="12" fill="#553b38"/>
+              <ellipse class="eye" cx="176" cy="139" rx="9" ry="12" fill="#553b38"/>
+              <ellipse cx="130" cy="135" rx="3" ry="4" fill="white"/>
+              <ellipse cx="179" cy="135" rx="3" ry="4" fill="white"/>
+              <path class="lid" d="M117 139 Q127 126 137 139 M166 139 Q176 126 186 139" fill="none" stroke="#a86a3c" stroke-width="3" stroke-linecap="round" opacity="0"/>
+            </g>
+            <path class="smile" d="M143 157 Q151 164 159 157" fill="none" stroke="#75443b" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
+        </g>
+        <g class="party-cap">
+          <path d="M102 83 Q108 40 153 40 Q194 40 202 79 L185 91 L112 94Z" fill="url(#cap)" stroke="#167b48" stroke-width="3"/>
+          <path d="M105 81 Q153 67 205 82 Q217 87 210 94 Q157 84 107 99 Q96 96 105 81Z" fill="#36b96b" stroke="#167b48" stroke-width="3"/>
+          <path d="M133 51 Q151 43 170 53" fill="none" stroke="#a7f0bd" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="154" cy="39" r="7" fill="#ffcf54" stroke="#16894b" stroke-width="2"/>
+          <path d="M118 75 L124 69 M184 73 L190 79" stroke="#a7f0bd" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g class="blower">
+          <path d="M151 159 Q161 166 171 160" fill="none" stroke="#75443b" stroke-width="4" stroke-linecap="round"/>
+          <path class="blower-paper" d="M166 162 L191 164 L211 153" fill="none" stroke="#fffdf0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="blower-stripe" d="M181 162 L188 162 M198 159 L204 157" stroke="#ee7298" stroke-width="6" stroke-linecap="round"/>
+          <path class="blower-tip" d="M209 154 L223 148 L218 163Z" fill="#ffb5ca" stroke="#e86d91" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M211 154 L219 155" stroke="#fff" stroke-width="2"/>
+        </g>
+      </svg>
+      <div class="mascot-caption" id="mascotCaption"><span class="caption-dot"></span> Домик уже готов дарить счастье</div>
+    </div>
+  </section>
+
+  <section class="content-grid">
+    <section class="order-card panel" aria-labelledby="orderTitle">
+      <div class="section-heading"><div><span class="section-kicker">СОБЕРИТЕ СВОЮ РАДОСТЬ</span><h2 id="orderTitle">Выберите подарок</h2></div><span class="gift-icon">✧</span></div>
+      <p class="muted">Чем больше подарков — тем больше поводов улыбнуться.</p>
+      <div class="quick-choices" id="quickChoices" aria-label="Быстрый выбор количества">
+        <button type="button" data-value="0.5">½ <small>подарка</small></button>
+        <button type="button" data-value="1" class="selected">1 <small>подарок</small></button>
+        <button type="button" data-value="2">2 <small>подарка</small></button>
+        <button type="button" data-value="3">3 <small>подарка</small></button>
+        <button type="button" data-value="5">5 <small>подарков</small></button>
+        <button type="button" data-value="10">10 <small>подарков</small></button>
+      </div>
+      <div class="slider-labels"><label for="giftRange">Количество подарков</label><span class="slider-hint">от 0,1 до 10</span></div>
+      <div class="range-wrap"><input id="giftRange" type="range" min="0.1" max="10" step="0.1" value="1" aria-label="Количество подарков"><div class="range-scale"><span>0,1</span><span>5</span><span>10</span></div></div>
+      <div class="quantity-price">
+        <div class="quantity-box"><span>ВЫ ВЫБРАЛИ</span><strong id="quantityDisplay">1</strong><small id="giftWord">подарок</small></div>
+        <div class="price-box"><span>ИТОГО К ОПЛАТЕ</span><strong><b id="priceDisplay">3 000</b> <small>конфеток</small></strong><div class="price-foot"><span>●</span> 3 000 за 1 подарок</div></div>
+      </div>
+      <button type="button" class="primary-btn" id="startOrder"><span>Подарить радость</span><span class="btn-arrow">↗</span></button>
+      <div class="secure-note"><span>✦</span> Без спешки. Только хорошие эмоции.</div>
+    </section>
+    <aside class="side-column">
+      <section class="mini-card candy-card"><div class="mini-card-top"><span class="mini-icon candy">✿</span><span class="pill">HAPPY FACT</span></div><h3>Радость заразительна.</h3><p>Один маленький жест может сделать чей-то день особенным.</p><div class="candy-decoration"><i></i><i></i><i></i><i></i><i></i></div></section>
+      <section class="mini-card how-card"><div class="mini-icon green">↗</div><h3>Как это работает?</h3><ol><li><span>01</span> Выберите количество</li><li><span>02</span> Подтвердите заказ</li><li><span>03</span> Пусть радость начнётся!</li></ol></section>
+    </aside>
+  </section>
+
+  <section class="orders-section" id="orders">
+    <div class="orders-heading"><div><span class="section-kicker">ВАША ИСТОРИЯ ДОБРА</span><h2>Мои заказы</h2></div><a class="track-link" href="track.html">Отследить заказ ↗</a></div>
+    <div id="ordersList" class="orders-list"><div class="empty-orders">Ваши заказы появятся здесь после оформления. Для проверки заказа сохраните его номер и код отслеживания.</div></div>
+    <p class="demo-note">Заказы сохраняются в общей защищённой базе. На этом устройстве показываются только заказы, которые вы сами недавно оформляли.</p>
+  </section>
+</main>
+<footer><a class="footer-brand" href="#home">Big Happy House <span>✦</span></a><span>Сделано с конфетками и заботой.</span><a href="#home" class="back-top">Наверх ↑</a></footer>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <section class="modal order-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть окно">×</button>
+    <div class="modal-eyebrow">МИНУТКА ВАЖНОГО</div>
+    <h2 id="modalTitle">Оформим радость?</h2>
+    <p id="modalDescription" class="modal-description">Проверьте количество и оставьте контакт для связи.</p>
+    <div class="summary-box"><div><span>Количество подарков</span><b id="modalQuantity">1</b></div><div><span>Итоговая стоимость</span><b><span id="modalPrice">3 000</span> ₽</b></div><div><span>Ваша экономия</span><b id="modalSavings">0 ₽</b></div></div>
+    <form id="orderForm" novalidate>
+      <label for="nickname">Никнейм <span aria-hidden="true">*</span></label>
+      <input id="nickname" name="nickname" maxlength="60" autocomplete="nickname" placeholder="@username" required>
+      <label for="phone">Номер телефона</label>
+      <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="+7 900 000-00-00">
+      <label for="contactMethod">Способ связи</label>
+      <select id="contactMethod" name="contactMethod"><option value="Telegram">Telegram</option><option value="Телефон">Телефон</option><option value="Другой способ">Другой способ</option></select>
+      <label for="orderComment">Комментарий <span class="muted">(необязательно)</span></label>
+      <textarea id="orderComment" name="comment" maxlength="500" rows="3" placeholder="Пожелания к заказу"></textarea>
+      <p id="formError" class="form-error" role="alert" hidden></p>
+      <div class="modal-actions"><button class="secondary-btn" id="cancelOrder" type="button">Отмена</button><button class="primary-btn confirm-btn" id="confirmOrder" type="submit"><span>Подтвердить заказ</span><span>↗</span></button></div>
+    </form>
+    <p class="modal-footnote">Заказ будет создан только после подтверждения сервером.</p>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="config.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>\n<script src="shared.js"></script>\n<script src="app.js"></script>
+</body>
+</html>
