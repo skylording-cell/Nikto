@@ -1,0 +1,6 @@
+const MIN=.1,MAX=10;
+function normalizeQuantity(value){const n=Number(value);if(!Number.isFinite(n)||n<MIN||n>MAX)throw Error("Количество должно быть от 0,1 до 10.");const t=Math.round(n*10);if(Math.abs(n*10-t)>1e-7)throw Error("Шаг количества должен быть 0,1.");return t/10}
+function priceFor(value){const q=normalizeQuantity(value);return Math.round(q<1?q*3000:3000+(q-1)*2800)}
+function savingsFor(value){const q=normalizeQuantity(value);return Math.max(0,Math.round(q*3000-priceFor(q)))}
+function validateOrder(data){if(!data||typeof data!=="object")throw Error("Проверьте данные");normalizeQuantity(data.quantity);const nickname=String(data.nickname??"").trim();if(!nickname)throw Error("Укажите никнейм");if(nickname.length>60)throw Error("Никнейм до 60 символов");const method=String(data.contact_method??"");if(!["Telegram","Телефон","Другой способ"].includes(method))throw Error("Способ связи");const phone=String(data.phone??"").trim();if(method==="Телефон"&&!phone)throw Error("Укажите номер телефона");if(phone&&(phone.length>30||!/^[+()\d\s.-]{6,30}$/.test(phone)||phone.replace(/\D/g,"").length<6))throw Error("Формат телефона");const comment=String(data.comment??"");if(comment.length>500)throw Error("Комментарий максимум 500");return true}
+module.exports={normalizeQuantity,priceFor,savingsFor,validateOrder};

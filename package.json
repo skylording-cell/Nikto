@@ -1,0 +1,1 @@
+{"name":"big-happy-house","version":"1.0.0","private":true,"description":"Big Happy House storefront and Supabase backend","scripts":{"test":"node --test tests/*.test.js"}}
